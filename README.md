@@ -20,7 +20,7 @@ In this project, we aim to provide crypto enthusiasts with valuable insights and
 
 ## How to Use
 
-1. Visit our website [Portfolio](https://portfolio.shariqdevops.online) to access the Free Crypto Analysis and Free Signals platform. (This is my portfolio website, we will update the link to our website as it goes deployed.
+1. Visit our website [DailyMarketAnalysis](https://shariqazeem.github.io/crypto-signals-project-cicd/src/index.html) to access the Free Crypto Analysis and Free Signals platform. (This is my portfolio website, we will update the link to our website as it goes deployed.
 
 2. Browse through the crypto analysis section to find the latest insights and market trends.
 
