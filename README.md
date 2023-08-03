@@ -34,7 +34,11 @@ We welcome contributions from the community! If you're interested in improving t
 
 ## Feedback
 
-Your feedback is crucial to us! If you encounter any issues, have suggestions, or want to share your appreciation, please don't hesitate to contact us at feedback@example.com.
+Your feedback is crucial to us! If you encounter any issues, have suggestions, or want to share your appreciation, please don't hesitate to contact us at shariqshaukat786@gmail.com .
+
+## Main Purpose
+
+Our main purpose for this website is for ease of people to access signals and analysis without joining any groups and making accounts on different social media for access. We aim to provide free analysis and signals with proper risk management and 100% success rate of signals with our 5 years of experience in Financial Markets
 
 ## Disclaimer
 
