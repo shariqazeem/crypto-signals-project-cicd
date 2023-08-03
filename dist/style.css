@@ -1,0 +1,34 @@
+.image-container {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .image-container:hover .image-overlay {
+    opacity: 1;
+  }
+
+  .hr-style::after {
+    content: "";
+    display: block;
+    width: 100px; /* Adjust the width of the line as needed */
+    height: 2px; /* Adjust the height of the line as needed */
+    background-color: #FFC500; /* Change the color to your desired color */
+    margin: 10px auto; /* Adjust the margin to position the line */
+  }
+
+ 
