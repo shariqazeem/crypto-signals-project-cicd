@@ -13,27 +13,48 @@
 <body class="bg-gray-100">
   <header class="bg-[#1c1c1c] text-white body-font">
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-      <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-        <!-- Replace the SVG icon with the Bitcoin logo image -->
-        <img src="/static/images/bitcoin-btc-logo.png" alt="Bitcoin Logo" class="w-12 h-12 rounded-full bg-bitcoin-orange p-2">
-      </a>              
-      <span class="ml-3 font-semibold text-white text-2xl" ><a href="/docs/index.html">Daily Market Analysis</a></span>
-      
-      <!-- Corrected the closing tag here -->
-      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-        <a href="/" class="mr-5 font-medium hover:text-yellow-500 cursor-pointer">Home</a>
-        <a class="mr-5 font-medium hover:text-yellow-500 cursor-pointer">Cryptocurrency</a>
-        <a class="mr-5 font-medium hover:text-yellow-500 cursor-pointer">Stock Market</a>
-        <a class="mr-5 font-medium hover:text-yellow-500 cursor-pointer">About Us</a>
-        <a href="/contact_page" class="mr-5 font-medium hover:text-yellow-500 cursor-pointer">Contact Us</a>
-        <button class="inline-flex items-center bg-black border-0 py-3 px-4 focus:outline-none hover:text-yellow-500 rounded-lg text-base mt-4 md:mt-0"><a href="/login_page">Login Now</a>
-          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-        </button>
-      </nav>          
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <!-- Replace the SVG icon with the Bitcoin logo image -->
+            <img src="/static/images/bitcoin-btc-logo.png" alt="Bitcoin Logo"
+                class="w-12 h-12 rounded-full bg-bitcoin-orange p-2">
+        </a>
+        <span class="ml-3 font-semibold text-white text-2xl"><a href="/docs/index.html">Daily Market Analysis</a></span>
+
+        <!-- Hamburger icon (three white lines) -->
+        <div class="md:hidden ml-auto">
+          <div class="space-y-1" id="menuBtn">
+              <div class="w-8 h-0.5 bg-white"></div>
+              <div class="w-8 h-0.5 bg-white"></div>
+              <div class="w-8 h-0.5 bg-white"></div>
+          </div>
+      </div>
+
+        <!-- Add a div to hold the navigation links -->
+        <div class="md:flex md:items-center m-auto hidden" id="menuItems">
+              <a href="/" class="block m-2 font-medium hover:text-yellow-500 cursor-pointer">Home</a>
+              <a href="/cryptocurrency" class="block m-2 font-medium hover:text-yellow-500 cursor-pointer">Cryptocurrency</a>
+              <a href="/stock_market" class="block m-2 font-medium hover:text-yellow-500 cursor-pointer">Stock Market</a>
+              <a href="/about_us" class="block m-2 font-medium hover:text-yellow-500 cursor-pointer">About Us</a>
+              <a href="/contact_page" class="block m-2 font-medium hover:text-yellow-500 cursor-pointer">Contact Us</a>
+
+          {% if 'user_id' in session %}
+          <!-- Display user email and logout button if the user is logged in -->
+          {% set username = session['email'].split('@')[0] %}
+          <span class="mr-5 font-medium text-white">Logged in as: {{ username }}</span>
+          <a href="/logout" class="mr-5 font-medium hover:text-yellow-500 cursor-pointer">Logout</a>
+          {% else %}
+          <!-- Display the login button if the user is not logged in -->
+          <button class="inline-flex items-center bg-black border-0 py-3 px-4 focus:outline-none hover:text-yellow-500 rounded-lg text-base mt-4 md:mt-0">
+              <a href="/login_page">Login Now</a>
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+          </button>
+          {% endif %}
+      </div>
     </div>
-  </header>
+</header>
     <div class="container mt-16 mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full mx-auto">
             <div class="bg-white shadow-md rounded-lg px-8 py-8">

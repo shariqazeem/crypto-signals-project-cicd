@@ -31,4 +31,37 @@
     margin: 10px auto; /* Adjust the margin to position the line */
   }
 
- 
+/* Style the menu items for small screens */
+#menuItems {
+  display: none;
+  padding-top: 10px;
+  border-top: 1px solid white; /* Add a separator line between hamburger and links */
+}
+
+/* Show the menu items on medium-sized screens and above */
+@media (min-width: 768px) {
+  #menuItems {
+      display: flex;
+      flex-direction: row;
+      border: none;
+      padding-top: 0;
+  }
+}
+
+/* Show the hamburger icon on small screens */
+@media (max-width: 767px) {
+  #menuBtn {
+      display: block;
+  }
+  #menuItems.active {
+      display: flex;
+      flex-direction: column;
+      background-color: #1c1c1c;
+  }
+}
+
+
+
+
+
+

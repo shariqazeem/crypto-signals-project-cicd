@@ -15,7 +15,15 @@ function animateOnScroll(entries, observer) {
   });
 }
 
-const blogObserver = new IntersectionObserver(animateOnScroll, options);
-blogEntries.forEach(entry => blogObserver.observe(entry));
+// JavaScript to toggle the visibility of menu items when clicking the hamburger icon
+document.addEventListener('DOMContentLoaded', function () {
+  const menuBtn = document.getElementById('menuBtn');
+  const menuItems = document.getElementById('menuItems');
+
+  menuBtn.addEventListener('click', function () {
+      menuItems.classList.toggle('active');
+  });
+});
+
 
 

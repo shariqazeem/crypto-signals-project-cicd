@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Market Analysis | Get 100% Accurate free signals on this platform</title>
+  <link href="/static/css/output.css" rel="stylesheet">
+  <link href="/static/css/style.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body class="bg-gray-100">
+  <header class="bg-[#1c1c1c] text-white body-font">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <!-- Replace the SVG icon with the Bitcoin logo image -->
+            <img src="/static/images/bitcoin-btc-logo.png" alt="Bitcoin Logo"
+                class="w-12 h-12 rounded-full bg-bitcoin-orange p-2">
+        </a>
+        <span class="ml-3 font-semibold text-white text-2xl"><a href="/docs/index.html">Daily Market Analysis</a></span>
+
+        <!-- Hamburger icon (three white lines) -->
+        <div class="md:hidden ml-auto">
+          <div class="space-y-1" id="menuBtn">
+              <div class="w-8 h-0.5 bg-white"></div>
+              <div class="w-8 h-0.5 bg-white"></div>
+              <div class="w-8 h-0.5 bg-white"></div>
+          </div>
+      </div>
+
+        <!-- Add a div to hold the navigation links -->
+        <div class="md:flex md:items-center m-auto hidden" id="menuItems">
+              <a href="/" class="block m-2 font-medium hover:text-yellow-500 cursor-pointer">Home</a>
+              <a href="/cryptocurrency" class="block m-2 font-medium hover:text-yellow-500 cursor-pointer">Cryptocurrency</a>
+              <a href="/stock_market" class="block m-2 font-medium hover:text-yellow-500 cursor-pointer">Stock Market</a>
+              <a href="/about_us" class="block m-2 font-medium hover:text-yellow-500 cursor-pointer">About Us</a>
+              <a href="/contact_page" class="block m-2 font-medium hover:text-yellow-500 cursor-pointer">Contact Us</a>
+
+          {% if 'user_id' in session %}
+          <!-- Display user email and logout button if the user is logged in -->
+          {% set username = session['email'].split('@')[0] %}
+          <span class="mr-5 font-medium text-white">Logged in as: {{ username }}</span>
+          <a href="/logout" class="mr-5 font-medium hover:text-yellow-500 cursor-pointer">Logout</a>
+          {% else %}
+          <!-- Display the login button if the user is not logged in -->
+          <button class="inline-flex items-center bg-black border-0 py-3 px-4 focus:outline-none hover:text-yellow-500 rounded-lg text-base mt-4 md:mt-0">
+              <a href="/login_page">Login Now</a>
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+          </button>
+          {% endif %}
+      </div>
+    </div>
+</header>
+
+<section class="text-gray-600 body-font"
+    style="background-image: url('/static/images/caraousel-bitcoin-2.jpg'); background-size: cover; background-position: center;">
+    <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+        <div
+            class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center bg-opacity-0 p-8 rounded bg-gradient-to-r from-black via-transparent to-transparent">
+            <p class="text-yellow-500 text-sm font-medium mb-4 bg-opacity-0">Advice and Strategy</p>
+            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white bg-opacity-0">Welcome to our 100% accurate Free Signals.</h1>
+            <p class="leading-relaxed bg-opacity-0 text-white mb-4">Our aim is to provide not only the signals but also help you calculate your risk management.</p>
+            <p class="leading-relaxed bg-opacity-0 text-white mb-8">You just need to enter your Portfolio size and the risk, and then we will tell you how many coins to buy with stop loss.</p>
+        </div>
+    </div>
+</section>
+
+  <!-- CoinGecko Coin Price Marquee Widget -->
+  <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/coinMarquee.js"></script>
+  <div id="coinmarketcap-widget-marquee" coins="1,1027,825,4134,1839" currency="USD" theme="dark" transparent="false"
+    show-symbol-logo="true"></div>
+
+    <!-- Container to display the free signals -->
+  <div class="flex flex-wrap -m-4">
+    {% for signal in free_signals %}
+    <div class="p-4 lg:w-1/3 md:w-1/2 w-full">
+      <div class="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
+        <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ signal[1] }}</h2>
+        <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">{{ signal[2] }}</h1>
+        <p class="leading-relaxed mb-3">Timestamp: {{ signal[4] }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+
+  <script src="/static/js/script.js"></script>
+  
+</body>
+
+</html>
