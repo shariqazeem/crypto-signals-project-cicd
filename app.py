@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template, session, redirect, url_for, g
 from flask_mysqldb import MySQL
+from flask_socketio import SocketIO
 import os
 
 
@@ -7,6 +8,7 @@ app = Flask(__name__)
 
 app.secret_key = os.urandom(24)
 app.config['SESSION_TYPE'] = 'filesystem'
+socketio = SocketIO(app)
 
 app.config['MYSQL_HOST'] = "localhost"
 app.config['MYSQL_USER'] = "root"
@@ -99,11 +101,13 @@ def free_signals():
         free_signals = cursor.fetchall()
         cursor.close()
 
+        # Emit the signals to the client
+        socketio.emit('signals_update', free_signals)
+
         return render_template('free_signals.html', free_signals=free_signals)
     else:
-        # If the user is not logged in, redirect to the login page or show an error message.
-        return redirect('/login_page')  # Or show an error message
-
+        # If the user is not logged in, redirect to the login page
+        return redirect('/login_page')
 
 
 
@@ -128,4 +132,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)
