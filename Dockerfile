@@ -4,7 +4,7 @@ FROM python:3.8-slim
 WORKDIR /usr/src/app
 
 # Update the system clock and install system dependencies
-RUN apt-get update && apt-get install -y pkg-config libmysqlclient-dev
+RUN apt-get update && apt-get install -y pkg-config
 
 # Copy the requirements.txt file to the container
 COPY requirements.txt .
