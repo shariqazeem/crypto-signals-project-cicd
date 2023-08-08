@@ -3,6 +3,10 @@ FROM python:3.8-slim-buster
 # Set the working directory inside the container
 WORKDIR /app
 
+# Update the system and install required dependencies
+RUN apt-get update && \
+    apt-get install -y libmysqlclient-dev build-essential
+
 # Copy the requirements.txt file to the container
 COPY requirements.txt requirements.txt
 
