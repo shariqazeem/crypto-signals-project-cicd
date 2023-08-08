@@ -3,8 +3,8 @@ FROM python:3.8-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the requirements.txt file from the root directory to the container
-COPY ../../requirements.txt .
+# Copy the requirements.txt file to the container
+COPY requirements.txt .
 
 # Install dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
