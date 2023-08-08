@@ -12,7 +12,7 @@ socketio = SocketIO(app)
 
 app.config['MYSQL_HOST'] = "localhost"
 app.config['MYSQL_USER'] = "root"
-app.config['MYSQL_PASSWORD'] = ""
+app.config['MYSQL_PASSWORD'] = "admin"
 app.config['MYSQL_DB'] = "crypto_analysis"
 
 mysql = MySQL(app)
