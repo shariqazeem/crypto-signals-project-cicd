@@ -15,5 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire app directory from the host to the container
 COPY . .
 
+EXPOSE 5000
+
 # Define the command to run your app
 CMD ["python", "app.py"]
