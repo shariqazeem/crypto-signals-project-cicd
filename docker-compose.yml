@@ -1,0 +1,23 @@
+version: '3'
+services:
+  web:
+    build: ./docker-files/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ""
+      MYSQL_DB: crypto_analysis
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 14142135
+      MYSQL_DATABASE: crypto_analysis
+    volumes:
+      - ./docker-files/db:/docker-entrypoint-initdb.d
