@@ -42,7 +42,7 @@ def signup():
         user_error_message = "Your passwords do not match. Please try again."
         return render_template('signup.html', user_error_message=user_error_message)
 
-    # Your signup logic here
+    ## Your signup logic here
     # Insert the new user into the database
     cursor.execute(
         "INSERT INTO users_db (email, password) VALUES (%s, %s)", (email, password))
