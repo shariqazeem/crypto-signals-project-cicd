@@ -10,7 +10,7 @@ app.secret_key = os.urandom(24)
 app.config['SESSION_TYPE'] = 'filesystem'
 socketio = SocketIO(app)
 
-app.config['MYSQL_HOST'] = "localhost"
+app.config['MYSQL_HOST'] = "db"
 app.config['MYSQL_USER'] = "root"
 app.config['MYSQL_PASSWORD'] = "admin"
 app.config['MYSQL_DB'] = "crypto_analysis"
