@@ -1,4 +1,7 @@
-FROM mysql:8.0
+FROM mysql:8.0.33
+
+ENV MYSQL_ROOT_PASSWORD="admin"
+ENV MYSQL_DATABASE="crypto_analysis"
 
 # Copy the SQL script to the image
-COPY init.sql /docker-entrypoint-initdb.d/
+ADD db_backup.sql docker-entrypoint-initdb.d/db_backup.sql

@@ -14,11 +14,14 @@ services:
       DB_NAME: crypto_analysis
 
   db:
-    image: mysql:8.0
+    image: mysql:8.0.33
+    build:
+      context: ./docker-files/db
     restart: always
+    ports:
+      - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: 14142135
-      MYSQL_DATABASE: crypto_analysis
+      - MYSQL_ROOT_PASSWORD=admin
     volumes:
       - db-data:/var/lib/mysql
     expose:
@@ -26,4 +29,4 @@ services:
       - 33060
 
 volumes:
-  db-data:
+  db-data: {}
