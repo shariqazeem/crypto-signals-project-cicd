@@ -2,12 +2,6 @@ pipeline{
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/shariqazeem/crypto-signals-project-cicd.git'
-            }
-        }
-
         stage('Deploy New Version on Remote Instance') {
             steps {
                 sshagent(credentials: ['52.15.78.148']) {
