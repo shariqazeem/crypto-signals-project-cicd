@@ -10,9 +10,9 @@ pipeline{
 
         stage('Deploy New Version on Remote Instance') {
             steps {
-                sshagent(credentials: ['crypto-app']) {
+                sshagent(credentials: ['52.15.78.148']) {
                     script {
-                        def remoteInstance = 'ubuntu@52.15.78.148'
+                        def remoteInstance = 'ubuntu@172.31.20.192'
                         def projectDirectory = 'crypto-signals-project-cicd'
                         def dockerComposePath = "${projectDirectory}/docker-compose.yml"
 
