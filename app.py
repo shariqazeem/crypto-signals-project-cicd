@@ -48,7 +48,7 @@ def signup():
     mysql.connection.commit()
 
     cursor.close()
-    return redirect(url_for('/home'))
+    return redirect(url_for('home'))
 
 
 @app.route('/login', methods=['POST'])
