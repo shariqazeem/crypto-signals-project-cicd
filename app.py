@@ -72,7 +72,7 @@ def login():
         # Redirect to the home page
         return redirect(url_for('home'))
     else:
-        # If user not found or password doesn't match, display login error message
+        ## If user not found or password doesn't match, display login error message
         login_error_message = "Invalid email or password. Please try again."
         return render_template('login.html', login_error_message=login_error_message)
 
