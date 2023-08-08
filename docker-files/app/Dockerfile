@@ -1,12 +1,19 @@
-FROM python:3
+FROM python:3.8-slim
 
-WORKDIR /usr/src/app
+# Set the working directory inside the container
+WORKDIR /app
 
-COPY requirements.txt .
+# Copy the requirements.txt file from the root directory to the container
+COPY ../../requirements.txt .
 
+# Install dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+# Copy the entire app directory from the host to the container
+COPY . /app
 
-CMD [ "python","app.py" ]
+# Expose port 5000
+EXPOSE 5000
 
+# Define the command to run your app
+CMD ["python", "app.py"]
