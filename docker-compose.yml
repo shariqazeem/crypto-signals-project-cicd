@@ -15,10 +15,15 @@ services:
 
   db:
     image: mysql:8.0
-    ports:
-      - "3306:3306"
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 14142135
       MYSQL_DATABASE: crypto_analysis
     volumes:
-      - ./docker-files/db:/docker-entrypoint-initdb.d
+      - db-data:/var/lib/mysql
+    expose:
+      - 3306
+      - 33060
+
+volumes:
+  db-data:
