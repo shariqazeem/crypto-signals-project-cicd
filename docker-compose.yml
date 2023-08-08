@@ -8,10 +8,10 @@ services:
     ports:
       - 5000:5000
     environment:
-      MYSQL_HOST: db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: "admin"
-      MYSQL_DB: crypto_analysis
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: "admin"
+      DB_NAME: crypto_analysis
 
   db:
     image: mysql:8.0
