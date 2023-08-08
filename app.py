@@ -39,7 +39,7 @@ def signup():
 
     # Check if passwords match
     if password != cpassword:
-        login_error_message = "Your passwords do not match. Please try again."
+        user_error_message = "Your passwords do not match. Please try again."
         return render_template('signup.html', user_error_message=user_error_message)
 
     # Your signup logic here
