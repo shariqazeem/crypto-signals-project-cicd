@@ -17,14 +17,12 @@ services:
     image: mysql:8.0.33
     environment:
       MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: crypto_analysis
     ports:
       - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
-      - ./docker-files/db_backup.sql:/docker-entrypoint-initdb.d/db_backup.sql
     expose:
       - 3306
-      
+
 volumes:
   db-data:
