@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Update the system and install required dependencies
 RUN apt-get update && \
-    apt-get install -y libmariadb-dev-compat build-essential
+    apt-get install -y libmariadb-dev-compat build-essential pkg-config
 
 # Copy the requirements.txt file to the container
 COPY requirements.txt requirements.txt
