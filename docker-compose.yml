@@ -17,7 +17,6 @@ services:
     image: mysql:8.0.33
     build:
       context: ./docker-files/db
-    restart: always
     ports:
       - "3306:3306"
     environment:
