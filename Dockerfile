@@ -1,7 +1,7 @@
-FROM python:3.8-slim
+FROM python:3
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Update the system clock and install system dependencies
 RUN apt-get update
@@ -13,7 +13,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire app directory from the host to the container
-COPY . /app
+COPY . .
 
 # Expose port 5000
 EXPOSE 5000
