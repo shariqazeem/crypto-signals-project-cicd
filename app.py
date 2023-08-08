@@ -34,11 +34,13 @@ def signup():
     existing_user = cursor.fetchone()
 
     if existing_user:
-        return jsonify({"message": "User already exists!"})
+        user_error_message = "Email already exists. Please use another email address."
+        return render_template('signup.html', user_error_message=user_error_message)
 
     # Check if passwords match
     if password != cpassword:
-        return jsonify({"message": "Passwords do not match!"})
+        login_error_message = "Your passwords do not match. Please try again."
+        return render_template('signup.html', user_error_message=user_error_message)
 
     # Your signup logic here
     # Insert the new user into the database

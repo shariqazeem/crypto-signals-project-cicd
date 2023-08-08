@@ -54,6 +54,16 @@
       </div>
     </div>
 </header>
+<!-- Accordion for displaying login error message -->
+{% if user_error_message %}
+<div class="mt-4">
+  <input type="checkbox" class="hidden" id="loginErrorAccordion">
+  <div class="bg-red-100 rounded p-2 mt-2">
+      <!-- Error message will be shown here -->
+      {{ user_error_message }}
+  </div>
+</div>    
+{% endif %}
     <div class="container mt-16 mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full mx-auto">
             <div class="bg-white shadow-md rounded-lg px-8 py-8">
