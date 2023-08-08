@@ -3,6 +3,11 @@ FROM python:3.8-slim
 # Set the working directory inside the container
 WORKDIR /app
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    libmysqlclient-dev \
+    pkg-config
+
 # Copy the requirements.txt file to the container
 COPY requirements.txt .
 
