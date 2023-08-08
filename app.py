@@ -2,7 +2,9 @@ from flask import Flask, request, jsonify, render_template, session, redirect, u
 from flask_mysqldb import MySQL
 from flask_socketio import SocketIO
 import os
+import pymysql
 
+pymysql.install_as_MySQLdb()
 
 app = Flask(__name__)
 
