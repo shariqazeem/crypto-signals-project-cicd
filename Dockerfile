@@ -4,11 +4,7 @@ FROM python:3.8-slim
 WORKDIR /app
 
 # Update the system clock and install system dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    libmysqlclient-dev \
-    pkg-config && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update
 
 # Copy the requirements.txt file to the container
 COPY requirements.txt .
