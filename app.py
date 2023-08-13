@@ -209,6 +209,18 @@ def home():
         # Redirect to the login page if the user is not logged in
         return redirect(url_for('login_page'))
     
+@app.route('/stock_market')
+def stock_market():
+    # Check if the user is logged in
+    if 'user_id' in session:
+        user_id = session['user_id']
+        email = session['email']
+        # Customize the header or other parts of the page based on the user's login status
+        return render_template('stocks.html', user_id=user_id, email=email)
+    else:
+        # Redirect to the login page if the user is not logged in
+        return redirect(url_for('login_page'))
+    
 @app.template_filter('get_username')
 def get_username(user_id):
     cursor = mysql.connection.cursor()
