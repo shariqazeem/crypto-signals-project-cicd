@@ -9,9 +9,9 @@ app.secret_key = os.urandom(24)
 app.config['SESSION_TYPE'] = 'filesystem'
 socketio = SocketIO(app)
 
-app.config['MYSQL_HOST'] = "db"
+app.config['MYSQL_HOST'] = "localhost"
 app.config['MYSQL_USER'] = "root"
-app.config['MYSQL_PASSWORD'] = "admin"
+app.config['MYSQL_PASSWORD'] = ""
 app.config['MYSQL_DB'] = "crypto_analysis"
 
 mysql = MySQL(app)
@@ -110,6 +110,91 @@ def free_signals():
         # If the user is not logged in, redirect to the login page
         return redirect('/login_page')
 
+@app.route('/signal_details/<int:signal_sno>', methods=['GET'])
+def signal_details(signal_sno):
+    if 'user_id' in session:
+        # Retrieve the user_id from the session
+        user_id = session['user_id']
+
+        # Retrieve the signal details from the database based on signal_sno
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT * FROM free_signals WHERE sno = %s", (signal_sno,))
+        signal_details = cursor.fetchone()
+        cursor.close()
+
+        # Retrieve main comments and their corresponding reply comments from the database
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT c.id, c.comment_text, c.timestamp, c.user_id, "
+               "r.id AS reply_id, r.reply_text, r.timestamp AS reply_timestamp, r.user_id AS reply_user_id "
+               "FROM comments c "
+               "LEFT JOIN replies r ON c.id = r.comment_id "
+               "WHERE c.signal_sno = %s", (signal_sno,))
+
+
+        comments_data = cursor.fetchall()
+        cursor.close()
+
+        # Organize the comments and replies into a dictionary
+        comments_dict = {}
+        for row in comments_data:
+            comment_id = row[0]
+            if comment_id not in comments_dict:
+                comments_dict[comment_id] = {
+                    'comment_text': row[1],
+                    'comment_timestamp': row[2],
+                    'comment_user_id': row[3],
+                    'replies': []
+                }
+            if row[4]:  # If reply exists
+                comments_dict[comment_id]['replies'].append({
+                    'reply_text': row[5],
+                    'reply_timestamp': row[6],
+                    'reply_user_id': row[7]
+                })
+
+        # Convert the dictionary to a list for template rendering
+        comments = list(comments_dict.values())
+
+        return render_template('signal_details.html', signal_details=signal_details, comments=comments, user_id=user_id)
+    else:
+        return redirect('/login_page')
+
+
+
+@app.route('/post_comment', methods=['POST'])
+def post_comment():
+    # Retrieve data from the form
+    signal_sno = request.form['signal_sno']
+    user_id = request.form['user_id']
+    comment_text = request.form['comment_text']
+
+    # Insert the comment into the database
+    cursor = mysql.connection.cursor()
+    cursor.execute("INSERT INTO comments (signal_sno, user_id, comment_text) VALUES (%s, %s, %s)",
+                   (signal_sno, user_id, comment_text))
+    mysql.connection.commit()
+    cursor.close()
+
+    # Redirect back to the signal details page to prevent form resubmission
+    return redirect(url_for('signal_details', signal_sno=signal_sno, user_id=user_id))
+
+# @app.route('/post_reply', methods=['POST'])
+# def post_reply():
+#     # Retrieve data from the form
+#     signal_sno = request.form['signal_sno']
+#     comment_id = request.form['comment_id']  # Make sure you have this field in your form
+#     user_id = request.form['user_id']
+#     reply_text = request.form['reply_text']
+
+#     # Insert the reply into the database
+#     cursor = mysql.connection.cursor()
+#     cursor.execute("INSERT INTO replies (comment_id, user_id, reply_text) VALUES (%s, %s, %s)",
+#                    (comment_id, user_id, reply_text))
+#     mysql.connection.commit()
+#     cursor.close()
+
+#     # Redirect back to the signal details page to prevent form resubmission
+#     return redirect(url_for('signal_details', signal_sno=signal_sno, user_id=user_id))
 
 
 @app.route('/home')
@@ -123,6 +208,15 @@ def home():
     else:
         # Redirect to the login page if the user is not logged in
         return redirect(url_for('login_page'))
+    
+@app.template_filter('get_username')
+def get_username(user_id):
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT email FROM users_db WHERE id = %s", (user_id,))
+    username = cursor.fetchone()[0].split('@')[0]
+    cursor.close()
+    return username
+
 
 
 @app.route('/logout')
